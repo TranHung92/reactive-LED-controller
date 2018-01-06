@@ -130,7 +130,6 @@ class Smooth extends React.Component<any, any> {
             value={this.state.midOctave}
             style={{ width: 400 }}
           />
-          <p>{Store.ip}</p>
         </div>
         <Dialog
           title="Dialog With Actions"
