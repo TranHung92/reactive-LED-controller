@@ -1,7 +1,7 @@
 language: node_js
 node_js: '9.3.0'
 cache: yarn
-before_deploy: "yarn build"
+script: yarn build
 deploy:
   provider: s3
   access_key_id: AKIAJEO5J4JOGK2PP5BA
