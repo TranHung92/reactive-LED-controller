@@ -4,33 +4,34 @@ export class Store {
   @observable public connection: WebSocket
   @observable public isConnected: boolean = false
   @observable public isLoading: boolean = false
-  @observable public ip: string = 'ws://192.168.1.13:81/'
-  @observable public generalVal: string = "1"
-  @observable public octaveVal : string= "A"
-  @observable public color = {
+  @observable public ip: string = 'ws://192.168.1.130:81/'
+  @observable public generalVal: string = '1'
+  @observable public octaveVal: string = 'A'
+  @observable
+  public color = {
     '1': {
-      r: "156",
-      g: "39",
-      b: "176",
+      r: '156',
+      g: '39',
+      b: '176',
       a: '1'
     },
     '2': {
-      r: "255",
-      g: "255",
-      b: "000",
+      r: '255',
+      g: '255',
+      b: '000',
       a: '1'
     },
     '3': {
-      r: "255",
-      g: "000",
-      b: "000",
+      r: '255',
+      g: '000',
+      b: '000',
       a: '1'
     }
-  } 
-  @observable public var1 = "050";
-  @observable public var2 = "050";
+  }
+  @observable public var1 = '050'
+  @observable public var2 = '050'
 
-  public connect = (ip) => {
+  public connect = ip => {
     try {
       this.connection = new WebSocket(ip, ['arduino'])
       this.isLoading = true
@@ -39,12 +40,12 @@ export class Store {
         this.isLoading = false
         console.log('Connect successfully')
       }
-  
+
       this.connection.onclose = () => {
         this.isLoading = false
         console.log('Disconnected')
       }
-  
+
       this.connection.onmessage = evt => {
         this.bigString2Vars(evt.data)
       }
@@ -94,9 +95,9 @@ export class Store {
     if (bigString2Send !== '') {
       console.log('dataSending', bigString2Send)
       this.connection.send('1A255002000255000012255000005004050')
-    }  
+    }
   }
 }
 
-const singleton = new Store() 
+const singleton = new Store()
 export default singleton
