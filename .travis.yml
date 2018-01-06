@@ -1,14 +1,14 @@
 language: node_js
 node_js: '9.3.0'
 cache: yarn
-before_deploy: "pwd"
+before_deploy: "yarn build"
 deploy:
   provider: s3
   access_key_id: AKIAJEO5J4JOGK2PP5BA
   secret_access_key:
     secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
   bucket: hobbithobby.com
-  # local-dir: target/build
+  local-dir: build
   acl: public_read
   skip_cleanup: true
   region: ap-southeast-1
@@ -19,7 +19,7 @@ deploy:
   secret_access_key:
     secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
   bucket: www.hobbithobby.com
-  # local-dir: target/build
+  local-dir: build
   acl: public_read
   skip_cleanup: true
   region: ap-southeast-1
