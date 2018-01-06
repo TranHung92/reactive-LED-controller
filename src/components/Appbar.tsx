@@ -13,7 +13,7 @@ class TweakAppBar extends React.Component<any, any> {
     return (
       <div>
         <AppBar
-          title={<span>Amazing Light Show</span>}
+          title={<span>Amazing Light Show 🙈🙉🙊</span>}
           iconElementLeft={
             <IconButton>
               <NavigationClose />
