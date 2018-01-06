@@ -1,6 +1,6 @@
 deploy:
   provider: s3
   access_key_id: "AKIAJEO5J4JOGK2PP5BA"
-  secret_access_key: "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"
+  secret_access_key: "azfzlHRn/OfiiIK5AEQJD+tRwo5wNfnPnmamPVMbXpvPAczH15N5smZD+5BbrTskU6RXNVT/J4OojN+1c/JGK3zzincUTks3bRNWISav1T8nWkE/1eISLBDU/N6+yqp85Gk+6MGxMsV+8hJVd9R5IyBxQ/WD5GhYeTpaZ4sUwRz/ZDquIDirG/EJjzWL0Rq0OHR1fynoESqdhTtQtNzlgZ9o806U2am28XVhrBHR6gGPXma9h1XIUtYaT+YKnSH3RBEez3XHvv7h5wsTHIjCouBqe7PqklrFUfxUS2wftaMp4UYsIIPbwFlDxwzW4yjMJWnkP5P+vPmgmUTByilwYfjaHHxiNDb/vtxMLtqTuownALVt45ESaoDywC1lmOXeKHUTfGFGr87jTebE68e5AiU+h1lY1Jv/ZG9tUGOiLEvt8Pa0VOFD7gnNmvgp4/qnMMEyhGGtIS5IztHyal/2fY29OcZIKbFw9HKcepJrGLnF3KmaHOdg1TjWDcRoPlU7nWAhDLKo+MolJlk6PRDAtzekTqPVAwofWBU22tciqngkWudLURPxTG9KpxmvtNj/+nKVZfXa3smVHoUX56lIH7Cbb6LrWB3+e/pQbrJrntyROy6+CKdXxVok3/Z+6oTBXTgqFoIm8gX6U64/V/KhR3jB5l7qWqGTzE5Ds16gtHg="
   bucket: "S3 Bucket"
   skip_cleanup: true
