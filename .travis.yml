@@ -4,8 +4,3 @@ deploy:
   secret_access_key: "HfgjlTUXsDsPzN8rnJPSBOMBx/9IgTI+n/DEe/Hi"
   bucket: "S3 Bucket"
   skip_cleanup: true
-
-
-
-
- 
