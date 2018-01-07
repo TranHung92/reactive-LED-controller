@@ -78,21 +78,31 @@ class Smooth extends React.Component<any, any> {
 
     return (
       <div style={{ padding: 20, display: 'flex' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 2 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexGrow: 2,
+            justifyContent: 'center'
+          }}
+        >
           <RaisedButton
             backgroundColor={this.rgbaToString(Store.color['1'])}
             label="Color 1"
             onClick={() => this.handleOpen('1')}
+            style={{ marginBottom: 20 }}
           />
           <RaisedButton
             backgroundColor={this.rgbaToString(Store.color['2'])}
             label="Color 2"
             onClick={() => this.handleOpen('2')}
+            style={{ marginBottom: 20 }}
           />
           <RaisedButton
             backgroundColor={this.rgbaToString(Store.color['3'])}
             label="Color 3"
             onClick={() => this.handleOpen('3')}
+            style={{ marginBottom: 20 }}
           />
         </div>
         <div style={{ display: 'flex', flexGrow: 1 }}>

@@ -2,6 +2,8 @@ language: node_js
 node_js: '9.3.0'
 cache: yarn
 script: yarn build
+install: 
+  - yarn add awscli
 deploy:
   - provider: s3
     access_key_id: AKIAJEO5J4JOGK2PP5BA
@@ -25,3 +27,6 @@ deploy:
     region: ap-southeast-1
     on:
       repo: TranHung92/reactive-LED-controller
+after_deploy:
+  - aws configure set preview.cloudfront true
+  - aws cloudfront create-invalidation --distribution-id E3B65CB6EN9IKM --paths "/*"
