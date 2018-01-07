@@ -77,26 +77,8 @@ class Smooth extends React.Component<any, any> {
     ]
 
     return (
-      <div style={{ padding: 20 }}>
-        <div style={{ display: 'flex' }}>
-          <p>Octave (0-All)</p>
-          <TextField
-            type="number"
-            defaultValue={Store.octaveVal}
-            value={Store.octaveVal}
-            errorText={this.state.octaveError}
-            onChange={this.onOctaveChange}
-          />
-          <Slider
-            style={{ width: 400 }}
-            min={0}
-            max={7}
-            step={1}
-            onChange={this.onOctaveChange}
-            value={this.state.octave}
-          />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ padding: 20, display: 'flex' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 2 }}>
           <RaisedButton
             backgroundColor={this.rgbaToString(Store.color['1'])}
             label="Color 1"
@@ -113,23 +95,47 @@ class Smooth extends React.Component<any, any> {
             onClick={() => this.handleOpen('3')}
           />
         </div>
-        <div style={{ display: 'flex' }}>
-          <p>Mid-Octave1 (%)</p>
-          <TextField
-            type="number"
-            defaultValue={this.state.midOctave}
-            value={this.state.midOctave}
-            errorText={this.state.midOctaveError}
-            onChange={this.onMidOctaveChange}
-          />
-          <Slider
-            min={0}
-            max={100}
-            step={1}
-            onChange={this.onMidOctaveChange}
-            value={this.state.midOctave}
-            style={{ width: 400 }}
-          />
+        <div style={{ display: 'flex', flexGrow: 1 }}>
+          <div>
+            <Slider
+              style={{ height: 200 }}
+              min={0}
+              max={7}
+              step={1}
+              axis="y"
+              onChange={this.onOctaveChange}
+              value={this.state.octave}
+            />
+            <TextField
+              type="number"
+              style={{ width: 50 }}
+              defaultValue={Store.octaveVal}
+              value={Store.octaveVal}
+              errorText={this.state.octaveError}
+              onChange={this.onOctaveChange}
+            />
+            <p>Octave (0-All)</p>
+          </div>
+          <div>
+            <Slider
+              min={0}
+              max={100}
+              step={1}
+              axis="y"
+              onChange={this.onMidOctaveChange}
+              value={this.state.midOctave}
+              style={{ height: 200 }}
+            />
+            <TextField
+              type="number"
+              style={{ width: 50 }}
+              defaultValue={this.state.midOctave}
+              value={this.state.midOctave}
+              errorText={this.state.midOctaveError}
+              onChange={this.onMidOctaveChange}
+            />
+            <p>Mid-Octave1 (%)</p>
+          </div>
         </div>
         <Dialog
           title="Dialog With Actions"
