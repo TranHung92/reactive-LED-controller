@@ -2,10 +2,10 @@ language: node_js
 node_js: '9.3.0'
 python: "3.5"
 cache: 
+  - pip3
   - yarn
-  - pip
+install: pip3 install awscli
 script: yarn build
-install: pip install awscli
 deploy:
   - provider: s3
     access_key_id: AKIAJEO5J4JOGK2PP5BA
