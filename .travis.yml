@@ -1,36 +1,44 @@
 sudo: required
 language: node_js
-node_js: '9.3.0'
-python: "3.6.3"
-cache: 
-  - pip
-  - yarn
+node_js: 9.3.0
+python: 3.6.3
+cache:
+- pip
+- yarn
 install: sudo -H pip install awscli --upgrade --ignore-installed six
-before_script: yarn
+before_script: 
+  - yarn
+  - ./scripts/aws_credentials.sh
 script: yarn build
 deploy:
-  - provider: s3
-    access_key_id: AKIAJEO5J4JOGK2PP5BA
-    secret_access_key:
-      secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
-    bucket: hobbithobby.com
-    local-dir: build
-    acl: public_read
-    skip_cleanup: true
-    region: ap-southeast-1
-    on:
-      repo: TranHung92/reactive-LED-controller
-  - provider: s3
-    access_key_id: AKIAJEO5J4JOGK2PP5BA
-    secret_access_key:
-      secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
-    bucket: www.hobbithobby.com
-    local-dir: build
-    acl: public_read
-    skip_cleanup: true
-    region: ap-southeast-1
-    on:
-      repo: TranHung92/reactive-LED-controller
+- provider: s3
+  access_key_id:
+    secure: A8o2lSTp4PLUDSjj5StFEi2zzemWH6ZFBlR5pt5tOIAJC9P96kdJjflJDEs30DUiS2Azzo5MMqehFPQWs+5L3CWhqHc1YQzTYR/Q/YhX/qBty1T29E4UMwUYGbyCWOGaFECs5JoCsUZXJgPkimnNC8oFvjnrEojT9lc8Xojm7xST27GQ0/gtSgCeO4bB6+d9eW0qRAQ+UAhwoju8wLMt1NrKj6d93tCfM2SyvSkHwDiBg+JxvB+7zB4/FWjE9qY5fZczqL4+vPYQ06g+7XA2lKHFjvWFBLBWkRbpz1M1Wodouk/sw7BgE0UcmFa7NPbps+KTOWJ4tMQAuATZ8oNMe6EtFgiQ+9q3TTzMXvudGeIuTl48gfyZmurOYchkAxSPt5YiNHPV3Ok2VX9I2BttZfXjTyQHhaH1jT2v1rwUbOBQjT6o7joOi1uWeKbw1lsFwKh+L+rj1aRHr35gbM6tRonlfpJ78OzJG/Pjy1wwrebq2UGfMiv2ld2z9tv/uaSs0IxERMyy87q9Pq0+5wxPrj72z2xsju0zfdegPsJOfHN9cwr/PI4Y5ClpiwY2BJ2L5bLpofEZs6x+slJTntShQdItmSJjVwMeFdU2Bk7XZ7jzatLzkQcUmknCk8De+59ez3uXTLVJcg25qteKXdVesMR78m8qOfWT2Sgr/iYyfl8=
+  secret_access_key:
+    secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
+  bucket: hobbithobby.com
+  local-dir: build
+  acl: public_read
+  skip_cleanup: true
+  region: ap-southeast-1
+  on:
+    repo: TranHung92/reactive-LED-controller
+- provider: s3
+  access_key_id:
+    secure: A8o2lSTp4PLUDSjj5StFEi2zzemWH6ZFBlR5pt5tOIAJC9P96kdJjflJDEs30DUiS2Azzo5MMqehFPQWs+5L3CWhqHc1YQzTYR/Q/YhX/qBty1T29E4UMwUYGbyCWOGaFECs5JoCsUZXJgPkimnNC8oFvjnrEojT9lc8Xojm7xST27GQ0/gtSgCeO4bB6+d9eW0qRAQ+UAhwoju8wLMt1NrKj6d93tCfM2SyvSkHwDiBg+JxvB+7zB4/FWjE9qY5fZczqL4+vPYQ06g+7XA2lKHFjvWFBLBWkRbpz1M1Wodouk/sw7BgE0UcmFa7NPbps+KTOWJ4tMQAuATZ8oNMe6EtFgiQ+9q3TTzMXvudGeIuTl48gfyZmurOYchkAxSPt5YiNHPV3Ok2VX9I2BttZfXjTyQHhaH1jT2v1rwUbOBQjT6o7joOi1uWeKbw1lsFwKh+L+rj1aRHr35gbM6tRonlfpJ78OzJG/Pjy1wwrebq2UGfMiv2ld2z9tv/uaSs0IxERMyy87q9Pq0+5wxPrj72z2xsju0zfdegPsJOfHN9cwr/PI4Y5ClpiwY2BJ2L5bLpofEZs6x+slJTntShQdItmSJjVwMeFdU2Bk7XZ7jzatLzkQcUmknCk8De+59ez3uXTLVJcg25qteKXdVesMR78m8qOfWT2Sgr/iYyfl8=
+  secret_access_key:
+    secure: hobaeJ3mzxamyR2tGwyuxcOdrWv851Fx+B+5sgJB/VEaFP/xJ2UanvhrAnuaaceDR7JsjH31kryxhHzAEuflgvXDNNq0YLbo1+waOwpw6Qwcyvdy5VWRZV4TKe7nsPVJeGaQycUuLE+Lf9W8MItUPPCWTsQXE1qm/9a/DLvl0c3DXY7BcnB0cFSkkcJY6nvpkiPluSC5TWqUgYAMH4/Mntte4g8iOQKvQyrpOdreFuU61V6BW8/fR4AuYutwmvtO/BlUbKmrrYRbCo/NA3dMWGexQKdbE2jZ1XEylwytnxgeJhdlucUNGwGFmk6TvDa5NOamx6yg4XXwqBS4LYEoULy/QMrxfxfY99WpEzA2nMtJR82nPUcydgT/eaZTwUQJvWoby46y09Li/tiBZvUCuif0Sj88JXINnMLeC8Xt6zTej8T5iL+xuun6AcLLcWPevvXb1O7z4A8nvUB0BWkEwIC94pGfo2C84uxo5pEBx2WJX1+QWPPImC/Las4P8SLCazK5QjbNUggBbkJ2CFUdVUB9zS5EuMjVGso/NpgC+7/Dg7H7o4z6jc56pR+z44VDdNJqeIci0+ujJ4IKG+gjmUAESqJL3HriPyIqaKcyuZ4D7hmzcK41bEbFT1rAjS2jJ9LDLiUObLfmfGwQqhcqvI6kg45iv6x+kkQuxNvyFIo=
+  bucket: www.hobbithobby.com
+  local-dir: build
+  acl: public_read
+  skip_cleanup: true
+  region: ap-southeast-1
+  on:
+    repo: TranHung92/reactive-LED-controller
 after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id E3B65CB6EN9IKM --paths "/*"
+- aws configure set preview.cloudfront true
+- aws cloudfront create-invalidation --distribution-id E3B65CB6EN9IKM --paths "/*"
+env:
+  global:
+  - secure: AUwHp0zVZmwj1lZpFcQFUatKd74lwKNr8jcvwMPE6tKwMZ5TfceQGmLctDKai3HejsqOeJZUAS/J8IDXF5U6UTqBI67WqKA/vSTCfUtYOJ617/mlFsBIQ/j9O+rEu9A8KR2pL/KB2GzWuCSCgqPgkH/h6VIetSAKRbrxu52cS1gt8pSh03mLCuja+qgNDstH+UkdwPVkqfsaT7bN2nhEp1KtzEQW6kRFRiifWi9oNK1Gj9QABDoX21JbBGje390+z9+s9/ksRAf7/G48pupAKyR3FJDjU1AzuB2ZLgzTvsmQOdgDyFBvkaHPrwZivgOf794P4agpzjj7rOdgSxJ5D8d/hVeusoceHguhrAcaGzXJsRkAbEVZibpWwzmCuPB/B4Y2oE8uBZCukjWi03i75qziBSOm5i+YIR1JT5PfssQkeaNXkGL/4hyP0zbJaSJ41sLLkhXnUZmjAiLnyEEdrTV/a9HfpLrArsOzR0hecq7biXUB8hlVmP5E3eAdDh4+8sSO4FXqm/4XTlmxzxmfys5E9m4EoPIoJVOgoBb+LpIWwZb6XAIo5g43zlYQphLZD+cZ/2/A6Sm6dzF361SmBkswW54KT0Y8UrTN+qTllzYGdmNg1MTUQizDQzkcVrLAJOk2J8XfGx06eQXQRqm9k3b+vcxjzmj1LPFEDkCX07A=
+  - secure: iCNeN3ps2cJvJkSJnUzbaADX/cSe4IjxRj24cMnrWJu2sZ1QP+jKlw9ZYp8OrJJI7plqPgws/Q6ZEkLAlDaJ14gNsDys0HBHGDfDLGYK6VgL6twGAEz3vU3kOs5VPTo2UiQE/p4AbFgHcGQTvPiAY+FiOEsVR5hyRI3h/Wx9klZXQzFP5CR7gjwKCYrWrg5hWn/4b9Y0/zHkvO/Isw+PZM7nc8sVQEdGIse5Ic+wFf+4xpP/9VOrt/JjBNSPoD7g6sNGMV8HYjM6SXL3dyJHh8R4L+SkrulJA7o0H7r1HqfTE9JkZ7d2IEe/tTufmlmGc5uY1L9ObiaQ+o+ersg+J0bh0MBYSMPng65DeFyFo+/mgmk59wVchLO/J9QQ9kM/UpSv564vRe2CBO9d40vNbIIT/2Tm5AWR1A1T3fpSkcRnmtmbmrE1K+7aOtEKrf2NNpxulPfV21Q8Y4pCyUmFaB5E8HyUtTffgjxa98yawXlJTnElAjoyYK3xE7zDeGnq++1gsaPJUZqGhumvgJ9TW2XMBCTNyT51M/rosBI0LTf8DZ7rzBeETdzcB84llQuFWJvhaj22Lbyp/pgdkFisVl4nWv0BC5tKy5t/ene+BZM8DLFoyaCeAHLG6e5OCRllIAuQLuc6Ej5S1bQZQTq7nLaGvo1LQq7b8r9OlN2+aLo=
