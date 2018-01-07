@@ -3,7 +3,7 @@ node_js: '9.3.0'
 cache: yarn
 script: yarn build
 install: 
-  - yarn add awscli
+  - pip install awscli
 deploy:
   - provider: s3
     access_key_id: AKIAJEO5J4JOGK2PP5BA
