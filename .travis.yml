@@ -6,14 +6,14 @@ cache:
 - pip
 - yarn
 install: sudo -H pip install awscli --upgrade --ignore-installed six
-before_script: 
-  - yarn
-  - ./scripts/aws_credentials.sh
+before_script:
+- yarn
+- "./scripts/aws_credentials.sh"
 script: yarn build
 deploy:
 - provider: s3
-  access_key_id: '${AWS_ACCESS_KEY_ID}'
-  secret_access_key: '${AWS_SECRET_ACCESS_KEY}'
+  access_key_id: "${AWS_ACCESS_KEY_ID}"
+  secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
   bucket: hobbithobby.com
   local-dir: build
   acl: public_read
@@ -22,8 +22,8 @@ deploy:
   on:
     repo: TranHung92/reactive-LED-controller
 - provider: s3
-  access_key_id: '${AWS_ACCESS_KEY_ID}'
-  secret_access_key: '${AWS_SECRET_ACCESS_KEY}'
+  access_key_id: "${AWS_ACCESS_KEY_ID}"
+  secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
   bucket: www.hobbithobby.com
   local-dir: build
   acl: public_read
@@ -36,5 +36,5 @@ after_deploy:
 - aws cloudfront create-invalidation --distribution-id E3B65CB6EN9IKM --paths "/*"
 env:
   global:
-  - secure: AUwHp0zVZmwj1lZpFcQFUatKd74lwKNr8jcvwMPE6tKwMZ5TfceQGmLctDKai3HejsqOeJZUAS/J8IDXF5U6UTqBI67WqKA/vSTCfUtYOJ617/mlFsBIQ/j9O+rEu9A8KR2pL/KB2GzWuCSCgqPgkH/h6VIetSAKRbrxu52cS1gt8pSh03mLCuja+qgNDstH+UkdwPVkqfsaT7bN2nhEp1KtzEQW6kRFRiifWi9oNK1Gj9QABDoX21JbBGje390+z9+s9/ksRAf7/G48pupAKyR3FJDjU1AzuB2ZLgzTvsmQOdgDyFBvkaHPrwZivgOf794P4agpzjj7rOdgSxJ5D8d/hVeusoceHguhrAcaGzXJsRkAbEVZibpWwzmCuPB/B4Y2oE8uBZCukjWi03i75qziBSOm5i+YIR1JT5PfssQkeaNXkGL/4hyP0zbJaSJ41sLLkhXnUZmjAiLnyEEdrTV/a9HfpLrArsOzR0hecq7biXUB8hlVmP5E3eAdDh4+8sSO4FXqm/4XTlmxzxmfys5E9m4EoPIoJVOgoBb+LpIWwZb6XAIo5g43zlYQphLZD+cZ/2/A6Sm6dzF361SmBkswW54KT0Y8UrTN+qTllzYGdmNg1MTUQizDQzkcVrLAJOk2J8XfGx06eQXQRqm9k3b+vcxjzmj1LPFEDkCX07A=
-  - secure: iCNeN3ps2cJvJkSJnUzbaADX/cSe4IjxRj24cMnrWJu2sZ1QP+jKlw9ZYp8OrJJI7plqPgws/Q6ZEkLAlDaJ14gNsDys0HBHGDfDLGYK6VgL6twGAEz3vU3kOs5VPTo2UiQE/p4AbFgHcGQTvPiAY+FiOEsVR5hyRI3h/Wx9klZXQzFP5CR7gjwKCYrWrg5hWn/4b9Y0/zHkvO/Isw+PZM7nc8sVQEdGIse5Ic+wFf+4xpP/9VOrt/JjBNSPoD7g6sNGMV8HYjM6SXL3dyJHh8R4L+SkrulJA7o0H7r1HqfTE9JkZ7d2IEe/tTufmlmGc5uY1L9ObiaQ+o+ersg+J0bh0MBYSMPng65DeFyFo+/mgmk59wVchLO/J9QQ9kM/UpSv564vRe2CBO9d40vNbIIT/2Tm5AWR1A1T3fpSkcRnmtmbmrE1K+7aOtEKrf2NNpxulPfV21Q8Y4pCyUmFaB5E8HyUtTffgjxa98yawXlJTnElAjoyYK3xE7zDeGnq++1gsaPJUZqGhumvgJ9TW2XMBCTNyT51M/rosBI0LTf8DZ7rzBeETdzcB84llQuFWJvhaj22Lbyp/pgdkFisVl4nWv0BC5tKy5t/ene+BZM8DLFoyaCeAHLG6e5OCRllIAuQLuc6Ej5S1bQZQTq7nLaGvo1LQq7b8r9OlN2+aLo=
+  - secure: SrMTyFEH8NEwi0HfCz0I/gab5y3frO+0gD75Zk3sYiYt6w3mat/eA/euaRZpILI7hWOeqWG4su7tz09NfwcrA9NbuJoUnFm/oi/qhMd3/ZC1f+SXs62XIOAkJhkH6eBOPvGhTKJSTjgmcSvFD7xdLyZGvpf0pRQke8CzYRJMmk80Eteg1xi+LjyugJnEz6+IabCFFrvj/DZWG6aIDMXKsF29iLtt8uyxqWcJLP4LT35C7wUruhY8m66WNhAmXxnQhBfQS1NlRSe3M32DmE9+kYhcJDy6TxCHkytyZ1VydX+t+/1iCEN+TR6E4gMwkNV9EJsGm6fM3zgDd+kCzlxxUo5fN399UoNFbHsN04UYAWWb6KP5hzAkp4GaVJh24OEDDOr/9LB01+OhJ9IPvIqYEB5gdZawvFOZZBAlgtKIf9x86kv+un/znY0sYpKdyMHw8DO9ETQthNxQNCyIrj//OrSkydLc/IuaN+ZctqzEcCjijXzy1oNtiOD+kqZ/IAPbZA7I0Ep9WJ76Nl6cCQYANsFOJsg2avk7QzNo3JQy9PrfzQtsN9vagBs4B1WjFAjBemNbq+xTD1XnjdynmKYpWdPNfFoW9GWm4Z88iFPCXgcqESivtcGQOxmHjuUmCCN8oHMxWSHshehYZYAbdnyTM19cI9dp3yutRJIWZ7Jp+ls=
+  - secure: CFfZ8PM4Hgkutm3vfsqjgzckyIgPHfP+4xyOohIRQtfvThAFOH4Kh9DmrlZp9jtQWa5kJH//Q3ofHG+2GVIXy26qkl508EXVFfjqSWJe2yUTpNGzmKPCHDWQf7+jxlp9aJt2flCljDmhoJTJgjzu9JSvfIIo2nuwrgEqoHivmbgY1e3xxE2Un55MMQW8+r+8xfbkcSM1saXt6XsGH+NE2rQF1X4xI8ayfNGlkeJ6v6aTfwUpnLaW8yO42lSynQWz9baFkv8Ws8cO6AAzR7czsJCByTWFoOWxHzqhIlURD5psi6e8SGs8D0V58XnHKCceMLYzaTEUhbT0zg9yHCmKgSTbFKpVlbJOliHThTIGrsYZCiNSCbYtHq193nMJBQTJBoSYTuxC1/QhrGAJVzsm38SWjVyLE+aPBWe8+BqHVLrqOb5jk/WBBKAl644RVBzOOivprqQKMJom0RZ/5XF1jhz1cTaaJU5+vl4KzfHwV0LEdz3CgHjQJz4Kh8wQx2CiwcH98efbBN982sBblvilY73tvmmxhoc35cvznaZfoyZc9GGgGJRP11cQWRuh8UOZMtbTI5FcAw0lCXzGUbh3w5Q/5uGjK9iw+t2PjmxrSG+RnzJzrC4p8KU8zyFXL+ioeklpBbylrEEZRpveepIJQdJbTI7yBUFxivcZkNNZM0o=
