@@ -7,6 +7,7 @@ import { Tabs, Tab } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 
 import Smooth from './Smooth'
+import Rough from './Rough'
 
 class Manual extends React.Component<any, any> {
   constructor(props) {
@@ -56,7 +57,9 @@ class Manual extends React.Component<any, any> {
             <div>
               <Smooth />
             </div>
-            <div>slide n°2</div>
+            <div>
+              <Rough />
+            </div>
             <div>slide n°3</div>
             <div>Rainbow</div>
             <div>Config</div>

@@ -1,50 +1,11 @@
 import * as React from 'react'
-// import { Provider } from 'mobx-react'
-import MaterialThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { Desktop, Mobile } from './page'
 
-import './App.css'
-import Appbar from './components/Appbar'
-import WebsocketAddress from './components/WebsocketAddress'
-import PreSets from './components/PreSets'
-import Manual from './components/Manual'
-
-import Store from './store'
-
-const theme = getMuiTheme({
-  datePicker: {
-    selectTextColor: '#fff'
-  }
-})
-
-class App extends React.Component<any, any> {
-  private store
-  constructor(props) {
-    super(props)
-  }
-
-  public componentDidMount() {
-    this.store = Store
-  }
-  render() {
-    // detect mobile
-    // console.log('navigator.userAgent', navigator.userAgent)
-
-    return (
-      <MaterialThemeProvider muiTheme={theme}>
-        <div>
-          <div>
-            <Appbar />
-          </div>
-          <WebsocketAddress />
-          <div style={{ display: 'flex', flex: '1 1 auto' }}>
-            <PreSets />
-            <Manual />
-          </div>
-        </div>
-      </MaterialThemeProvider>
-    )
-  }
+const App = () => {
+  const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+    navigator.userAgent.toLowerCase()
+  )
+  return isMobile ? <Mobile /> : <Desktop />
 }
 
 export default App
