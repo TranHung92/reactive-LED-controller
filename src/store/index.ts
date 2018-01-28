@@ -4,7 +4,8 @@ export class Store {
   @observable public connection: WebSocket
   @observable public isConnected: boolean = false
   @observable public isLoading: boolean = false
-  @observable public ip: string = 'ws://192.168.1.130:81/'
+  @observable public ip: string = 'ws://192.168.1.132:81/'
+  @observable public activeSlide: number = 0
   @observable public generalVal: string = '1'
   @observable public octaveVal: string = 'A'
   @observable
@@ -94,7 +95,7 @@ export class Store {
     )
     if (bigString2Send !== '') {
       console.log('dataSending', bigString2Send)
-      this.connection.send('1A255002000255000012255000005004050')
+      this.connection.send('1A000000230249000000240000000072050')
     }
   }
 }
