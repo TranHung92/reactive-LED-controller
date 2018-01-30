@@ -4,7 +4,7 @@ export class Store {
   @observable public connection: WebSocket
   @observable public isConnected: boolean = false
   @observable public isLoading: boolean = false
-  @observable public ip: string = 'ws://192.168.1.132:81/'
+  @observable public ip: string | null = '' //ws://192.168.1.132:81/
   @observable public activeSlide: number = 0
   @observable public generalVal: string = '1'
   @observable public octaveVal: string = 'A'
@@ -32,6 +32,13 @@ export class Store {
   @observable public var1 = '050'
   @observable public var2 = '050'
 
+  public getSocketIp = () => {
+    this.ip = localStorage.getItem('hobbithobby-socketIp')
+    if (this.ip) {
+      this.connect(this.ip)
+    }
+  }
+
   public connect = ip => {
     try {
       this.connection = new WebSocket(ip, ['arduino'])
@@ -39,6 +46,10 @@ export class Store {
       this.connection.onopen = () => {
         this.isConnected = true
         this.isLoading = false
+        const storageIp = localStorage.getItem('hobbithobby-socketIp')
+        if (storageIp !== ip) {
+          localStorage.setItem('hobbithobby-socketIp', ip)
+        }
         console.log('Connect successfully')
       }
 

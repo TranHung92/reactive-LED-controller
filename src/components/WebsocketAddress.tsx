@@ -35,7 +35,7 @@ class WebsocketAddress extends React.Component<any, any> {
         <TextField
           hintText="Hint Text"
           floatingLabelText="Floating Label Text"
-          value={Store.ip}
+          value={Store.ip || ''}
           onChange={this.handleIpChange}
         />
         <RaisedButton

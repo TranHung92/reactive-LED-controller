@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { observer } from 'mobx-react'
+import { Route, BrowserRouter, Redirect } from 'react-router-dom'
 import { spring, AnimatedSwitch } from 'react-router-transition'
 import MaterialThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -7,9 +8,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 // import Toolbar from '../components/Mobile/Toolbar'
 // import Item from '../components/Mobile/Item'
 
+import Connect from '../components/Mobile/pages/Connect'
 import Home from '../components/Mobile/pages/Home'
 import VisualizerList from '../components/Mobile/pages/VisualizerList'
 import LoopList from '../components/Mobile/pages/LoopList'
+
+import Store from '../store'
 
 const theme = getMuiTheme({
   datePicker: {
@@ -60,6 +64,13 @@ class Mobile extends React.Component<any, any> {
             mapStyles={mapStyles}
             className="route-wrapper"
           >
+            <Route
+              exact
+              path="/"
+              render={() =>
+                Store.isConnected ? <Redirect to="/home" /> : <Connect />
+              }
+            />
             <Route path="/home" component={Home} />
             <Route path="/visualizer" component={VisualizerList} />
             <Route path="/loop" component={LoopList} />
@@ -70,4 +81,4 @@ class Mobile extends React.Component<any, any> {
   }
 }
 
-export default Mobile
+export default observer(Mobile)
