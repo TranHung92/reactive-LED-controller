@@ -15,6 +15,8 @@ import LoopList from '../components/Mobile/pages/LoopList'
 
 import Store from '../store'
 
+import './mobileStyle.css'
+
 const theme = getMuiTheme({
   datePicker: {
     selectTextColor: '#fff'

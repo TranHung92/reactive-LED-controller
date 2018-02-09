@@ -16,7 +16,6 @@ class HamburgerButton extends React.Component<Props, any> {
 
   public render() {
     const { isSidebarOpen, toggle, isBackwardArrow, back } = this.props
-    console.log('isbabcbascbas', isBackwardArrow)
 
     return (
       <div

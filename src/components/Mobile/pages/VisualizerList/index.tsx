@@ -1,14 +1,15 @@
 import * as React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import range from 'lodash.range'
 import { Motion, spring } from 'react-motion'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 
-import ToolBar from './components/ToolBar'
-import HamburgerButton from './components/HamburgerButton'
+import ToolBar from '../components/ToolBar'
+import HamburgerButton from '../components/HamburgerButton'
+import ListMapping from './ListMapping'
 
-import styles from './style'
+import styles from '../style'
 
 const reinsert = (arr, from, to) => {
   const _arr = arr.slice(0)
@@ -24,6 +25,19 @@ const clamp = (n, min, max) => {
 
 const springConfig = { stiffness: 300, damping: 50 }
 const itemsCount = 4
+
+interface Props {}
+
+// interface States {
+//   containerPosition: string
+// topDeltaY: number
+// mouseY: number
+// isPressed: boolean
+// originalPosOfLastPressed: number
+// order: any
+// activeItem: number | undefined
+// isSidebarOpen: boolean
+// }
 
 class VisualizerList extends React.Component<any, any> {
   constructor(props) {
@@ -137,6 +151,10 @@ class VisualizerList extends React.Component<any, any> {
     this.setState(prev => ({ isSidebarOpen: !prev.isSidebarOpen }))
   }
 
+  public closeSidebar = () => {
+    this.setState({ isSidebarOpen: false })
+  }
+
   public render() {
     const { mouseY, isPressed, originalPosOfLastPressed } = this.state
     return (
@@ -160,9 +178,24 @@ class VisualizerList extends React.Component<any, any> {
           isBackwardArrow={this.state.activeItem !== undefined}
         />
         <ToolBar />
-        <Drawer open={this.state.isSidebarOpen}>
-          <MenuItem>Menu Item</MenuItem>
-          <MenuItem>Menu Item 2</MenuItem>
+        <Drawer
+          open={this.state.isSidebarOpen}
+          docked={false}
+          onRequestChange={this.closeSidebar}
+          containerStyle={{ paddingTop: 100 }}
+        >
+          <Link
+            to="/home"
+            // onClick={() => this.setState({ containerPosition: 'absolute' })}
+          >
+            <MenuItem>Menu Item</MenuItem>
+          </Link>
+          <Link
+            to="/loop"
+            // onClick={() => this.setState({ containerPosition: 'absolute' })}
+          >
+            <MenuItem>Menu Item2</MenuItem>
+          </Link>
         </Drawer>
         <div
         // style={{
@@ -212,7 +245,7 @@ class VisualizerList extends React.Component<any, any> {
                       zIndex: this.zIndexCalc(i)
                     }}
                   >
-                    <h1 onClick={this.onBack}>{`Item No.${i}`}</h1>
+                    {ListMapping(this.state.activeItem === i)[i]}
                   </div>
                 )}
               </Motion>

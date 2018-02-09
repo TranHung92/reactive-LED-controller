@@ -5,7 +5,7 @@ class LoopList extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {
-      containerPosition: 'relative'
+      containerPosition: 'absolute'
     }
   }
 

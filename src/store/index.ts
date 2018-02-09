@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, autorun } from 'mobx'
 
 export class Store {
   @observable public connection: WebSocket
@@ -27,11 +27,29 @@ export class Store {
       g: '000',
       b: '000',
       a: '1'
+    },
+    '4': {
+      r: '255',
+      g: '000',
+      b: '000',
+      a: '1'
     }
   }
   @observable public var1 = '050'
   @observable public var2 = '050'
 
+  constructor() {
+    this.getSocketIp()
+    autorun(() => {
+      // if (this.connection.readyState !== 0) {
+      //   await this.getSocketIp()
+      //   console.log('this.ip', this.ip)
+      // }
+      // console.log('this.connection.readyState', this.connection.readyState)
+
+      this.sendPattern()
+    })
+  }
   public getSocketIp = () => {
     this.ip = localStorage.getItem('hobbithobby-socketIp')
     if (this.ip) {
@@ -65,6 +83,7 @@ export class Store {
       this.isConnected = false
       console.error('errorr', err.message)
     }
+    console.log('this.connection', this.connection)
   }
 
   public bigString2Vars = bigString => {
@@ -106,7 +125,7 @@ export class Store {
     )
     if (bigString2Send !== '') {
       console.log('dataSending', bigString2Send)
-      this.connection.send('1A000000230249000000240000000072050')
+      this.connection.send(bigString2Send)
     }
   }
 }

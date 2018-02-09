@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom'
 
 import Store from '../../../store'
 
-class Home extends React.Component<any, any> {
+interface Props {}
+
+interface States {
+  itemStyle: { [index: number]: React.CSSProperties }
+  containerPosition: string
+}
+
+class Home extends React.Component<Props, States> {
   private itemDefaultStyle = {
     transition: 'all 0.3s',
     transform: 'translateX(15px)'
@@ -34,7 +41,7 @@ class Home extends React.Component<any, any> {
             ? this.itemDefaultStyle
             : this.itemEnterStyle[1]
       },
-      containerPosition: 'relative'
+      containerPosition: 'absolute'
     }
   }
 
