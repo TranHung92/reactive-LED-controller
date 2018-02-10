@@ -29,9 +29,14 @@ class Rough extends React.Component<Props, States> {
     }
   }
 
-  public componentDidMount() {
-    Store.generalVal = '1'
-    Store.octaveVal = 'A'
+  public componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.isActive !== this.props.isActive &&
+      nextProps.isActive === true
+    ) {
+      Store.generalVal = '2'
+      Store.octaveVal = 'A'
+    }
   }
 
   private handleOpen = (colorNumber: string) => {
@@ -45,8 +50,8 @@ class Rough extends React.Component<Props, States> {
   private handleColorPicker = color => {
     if (this.state.currentColor === '4' && Store.generalVal !== '3') {
       Store.generalVal = '3'
-    } else if (this.state.currentColor !== '4' && Store.generalVal !== '1') {
-      Store.generalVal = '1'
+    } else if (this.state.currentColor !== '4' && Store.generalVal !== '2') {
+      Store.generalVal = '2'
     }
 
     Store.color = {
