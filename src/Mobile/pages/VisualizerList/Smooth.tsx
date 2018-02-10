@@ -4,24 +4,38 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import { CirclePicker } from 'react-color'
 
-import OctaveSelector from '../components/OctaveSelector'
-import ColorPicker from '../components/ColorPicker'
-import SliderPopover from '../components/SliderPopover'
+import OctaveSelector from '../../components/OctaveSelector'
+import ColorPicker from '../../components/ColorPicker'
+import SliderPopover from '../../components/SliderPopover'
 
-import Store from '../../../../store'
-import { setVar } from '../../../../helpers'
+import Store from '../../../store'
+import { setVar } from '../../../helpers'
 
-class Smooth extends React.Component<any, any> {
+interface Props {
+  isActive: boolean
+}
+
+interface States {
+  open: boolean
+  currentColor: any
+}
+
+class Smooth extends React.Component<Props, States> {
   constructor(props) {
     super(props)
     this.state = {
       open: false,
-      octave: 0,
-      midOctave: 0,
-      octaveError: '',
-      midOctaveError: '',
-      currentColor: undefined,
-      isMidOctaveOpen: false
+      currentColor: undefined
+    }
+  }
+
+  public componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.isActive !== this.props.isActive &&
+      nextProps.isActive === true
+    ) {
+      Store.generalVal = '1'
+      Store.octaveVal = 'A'
     }
   }
 

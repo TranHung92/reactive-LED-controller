@@ -1,27 +1,37 @@
 import * as React from 'react'
+import { observer } from 'mobx-react'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import { CirclePicker } from 'react-color'
 
-import OctaveSelector from '../components/OctaveSelector'
-import ColorPicker from '../components/ColorPicker'
-import SliderPopover from '../components/SliderPopover'
+import OctaveSelector from '../../components/OctaveSelector'
+import ColorPicker from '../../components/ColorPicker'
+import SliderPopover from '../../components/SliderPopover'
 
-import Store from '../../../../store'
-import { setVar } from '../../../../helpers'
+import Store from '../../../store'
+import { setVar } from '../../../helpers'
 
-class Rough extends React.Component<any, any> {
+interface Props {
+  isActive: boolean
+}
+
+interface States {
+  open: boolean
+  currentColor: any
+}
+
+class Rough extends React.Component<Props, States> {
   constructor(props) {
     super(props)
     this.state = {
       open: false,
-      octave: 0,
-      midOctave: 0,
-      octaveError: '',
-      midOctaveError: '',
-      currentColor: undefined,
-      isMidOctaveOpen: false
+      currentColor: undefined
     }
+  }
+
+  public componentDidMount() {
+    Store.generalVal = '1'
+    Store.octaveVal = 'A'
   }
 
   private handleOpen = (colorNumber: string) => {
@@ -33,9 +43,20 @@ class Rough extends React.Component<any, any> {
   }
 
   private handleColorPicker = color => {
+    if (this.state.currentColor === '4' && Store.generalVal !== '3') {
+      Store.generalVal = '3'
+    } else if (this.state.currentColor !== '4' && Store.generalVal !== '1') {
+      Store.generalVal = '1'
+    }
+
     Store.color = {
       ...Store.color,
-      [this.state.currentColor]: color.rgb
+      [this.state.currentColor]: {
+        r: setVar(color.rgb.r),
+        g: setVar(color.rgb.g),
+        b: setVar(color.rgb.b),
+        a: color.rgb.a
+      }
     }
   }
 
@@ -93,6 +114,11 @@ class Rough extends React.Component<any, any> {
               rgbaToString={this.rgbaToString}
               index={'3'}
             />
+            <ColorPicker
+              handleOpen={this.handleOpen}
+              rgbaToString={this.rgbaToString}
+              index={'4'}
+            />
             <SliderPopover
               value={parseInt(Store.var1)}
               onChange={this.onMidOctaveChange}
@@ -120,4 +146,4 @@ class Rough extends React.Component<any, any> {
   }
 }
 
-export default Rough
+export default observer(Rough)

@@ -2,7 +2,7 @@ import * as React from 'react'
 import ReactSwipe from 'react-swipe'
 import { Link } from 'react-router-dom'
 
-import Store from '../../../store'
+import Store from '../../store'
 
 interface Props {}
 

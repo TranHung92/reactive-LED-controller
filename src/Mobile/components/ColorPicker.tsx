@@ -1,7 +1,7 @@
 import * as React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import Store from '../../../../store'
+import Store from '../../store'
 
 const ColorPicker = ({ handleOpen, rgbaToString, index }) => {
   let title

@@ -9,7 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
-import Store from '../../store'
+import Store from '../../../store'
 
 class Smooth extends React.Component<any, any> {
   constructor(props) {
@@ -17,11 +17,9 @@ class Smooth extends React.Component<any, any> {
     this.state = {
       open: false,
       octave: 0,
-      midOctave1: 0,
-      midOctave2: 0,
+      midOctave: 0,
       octaveError: '',
-      midOctave1Error: '',
-      midOctave2Error: '',
+      midOctaveError: '',
       currentColor: undefined
     }
   }
@@ -34,24 +32,13 @@ class Smooth extends React.Component<any, any> {
     this.setState({ open: false })
   }
 
-  private onMidOctave1Change = (e, newVal) => {
+  private onMidOctaveChange = (e, newVal) => {
     if (newVal >= 0 && newVal <= 100) {
-      this.setState({ midOctave1: newVal, midOctave1Error: '' })
+      this.setState({ midOctave: newVal, midOctaveError: '' })
     } else {
       this.setState({
-        midOctave1: newVal,
-        midOctave1Error: 'Enter a number between 0-100'
-      })
-    }
-  }
-
-  private onMidOctave2Change = (e, newVal) => {
-    if (newVal >= 0 && newVal <= 100) {
-      this.setState({ midOctave2: newVal, midOctave2Error: '' })
-    } else {
-      this.setState({
-        midOctave2: newVal,
-        midOctave2Error: 'Enter a number between 0-100'
+        midOctave: newVal,
+        midOctaveError: 'Enter a number between 0-100'
       })
     }
   }
@@ -145,39 +132,19 @@ class Smooth extends React.Component<any, any> {
               max={100}
               step={1}
               axis="y"
-              onChange={this.onMidOctave1Change}
-              value={this.state.midOctave1}
+              onChange={this.onMidOctaveChange}
+              value={this.state.midOctave}
               style={{ height: 200 }}
             />
             <TextField
               type="number"
               style={{ width: 50 }}
-              defaultValue={this.state.midOctave1}
-              value={this.state.midOctave1}
-              errorText={this.state.midOctave1Error}
-              onChange={this.onMidOctave1Change}
+              defaultValue={this.state.midOctave}
+              value={this.state.midOctave}
+              errorText={this.state.midOctaveError}
+              onChange={this.onMidOctaveChange}
             />
             <p>Mid-Octave1 (%)</p>
-          </div>
-          <div>
-            <Slider
-              min={0}
-              max={100}
-              step={1}
-              axis="y"
-              onChange={this.onMidOctave2Change}
-              value={this.state.midOctave2}
-              style={{ height: 200 }}
-            />
-            <TextField
-              type="number"
-              style={{ width: 50 }}
-              defaultValue={this.state.midOctave2}
-              value={this.state.midOctave2}
-              errorText={this.state.midOctave2Error}
-              onChange={this.onMidOctave2Change}
-            />
-            <p>Mid-Octave2 (%)</p>
           </div>
         </div>
         <Dialog

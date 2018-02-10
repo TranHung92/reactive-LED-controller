@@ -4,7 +4,7 @@ import Spinner from 'react-spinkit'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import Store from '../store'
+import Store from '../../store'
 
 class WebsocketAddress extends React.Component<any, any> {
   constructor(props) {

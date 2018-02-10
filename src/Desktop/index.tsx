@@ -4,10 +4,10 @@ import MaterialThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 import '../App.css'
-import Appbar from '../components/Appbar'
-import WebsocketAddress from '../components/WebsocketAddress'
-import PreSets from '../components/PreSets'
-import Manual from '../components/Manual'
+import Appbar from './components/Appbar'
+import WebsocketAddress from './components/WebsocketAddress'
+import PreSets from './components/PreSets'
+import Manual from './components/Manual'
 
 import Store from '../store'
 

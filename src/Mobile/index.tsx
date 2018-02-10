@@ -5,13 +5,7 @@ import { spring, AnimatedSwitch } from 'react-router-transition'
 import MaterialThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-// import Toolbar from '../components/Mobile/Toolbar'
-// import Item from '../components/Mobile/Item'
-
-import Connect from '../components/Mobile/pages/Connect'
-import Home from '../components/Mobile/pages/Home'
-import VisualizerList from '../components/Mobile/pages/VisualizerList'
-import LoopList from '../components/Mobile/pages/LoopList'
+import { Connect, Home, VisualizerList, LoopList } from './pages'
 
 import Store from '../store'
 

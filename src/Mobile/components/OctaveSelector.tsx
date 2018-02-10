@@ -5,7 +5,7 @@ import Popover, { PopoverAnimationVertical } from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 
-import Store from '../../../../store'
+import Store from '../../store'
 
 class OctaveSelector extends React.Component<any, any> {
   constructor(props) {

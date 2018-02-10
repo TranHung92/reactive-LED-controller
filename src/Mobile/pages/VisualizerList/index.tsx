@@ -5,11 +5,11 @@ import { Motion, spring } from 'react-motion'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 
-import ToolBar from '../components/ToolBar'
-import HamburgerButton from '../components/HamburgerButton'
+import ToolBar from '../../components/ToolBar'
+import HamburgerButton from '../../components/HamburgerButton'
 import ListMapping from './ListMapping'
 
-import styles from '../style'
+import styles from '../../style'
 
 const reinsert = (arr, from, to) => {
   const _arr = arr.slice(0)
@@ -39,7 +39,7 @@ interface Props {}
 // isSidebarOpen: boolean
 // }
 
-class VisualizerList extends React.Component<any, any> {
+class VisualizerList extends React.Component<Props, any> {
   constructor(props) {
     super(props)
     this.state = {

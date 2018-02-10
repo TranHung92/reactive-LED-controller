@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import Spinner from 'react-spinkit'
 
-import Store from '../../../store'
+import Store from '../../store'
 
 class Connect extends React.Component<any, any> {
   constructor(props) {
