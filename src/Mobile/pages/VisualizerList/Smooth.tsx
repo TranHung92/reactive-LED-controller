@@ -7,6 +7,7 @@ import { CirclePicker } from 'react-color'
 import OctaveSelector from '../../components/OctaveSelector'
 import ColorPicker from '../../components/ColorPicker'
 import SliderPopover from '../../components/SliderPopover'
+import SavingButton from '../../components/SavingButton'
 
 import Store from '../../../store'
 import { setVar } from '../../../helpers'
@@ -145,6 +146,7 @@ class Smooth extends React.Component<Props, States> {
               onChangeComplete={this.handleColorPicker}
             />
           </Dialog>
+          <SavingButton />
         </div>
       )
     }

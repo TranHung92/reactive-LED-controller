@@ -1,5 +1,7 @@
 import { observable, autorun } from 'mobx'
 
+import { PatternStorage } from './interfaces'
+
 export class Store {
   @observable public connection: WebSocket
   @observable public isConnected: boolean = false
@@ -38,8 +40,51 @@ export class Store {
   @observable public var1 = '050'
   @observable public var2 = '050'
 
+  private bigString2Send: string = ''
+  private patternStorage: PatternStorage = {
+    1: [],
+    2: []
+  }
+  public currentPatternMain: string = ''
+  public currentPatternTop: string = ''
+
   constructor() {
     this.getSocketIp()
+    const pattern = localStorage.getItem('hobbithobby-pattern')
+    if (pattern) {
+      this.patternStorage = JSON.parse(pattern)
+    }
+
+    this.currentPatternTop = '3'.concat(
+      this.octaveVal,
+      this.color['4'].r,
+      this.color['4'].g,
+      this.color['4'].b,
+      this.color['2'].r,
+      this.color['2'].g,
+      this.color['2'].b,
+      this.color['3'].r,
+      this.color['3'].g,
+      this.color['3'].b,
+      this.var1,
+      this.var2
+    )
+
+    this.currentPatternMain = this.generalVal.concat(
+      this.octaveVal,
+      this.color['1'].r,
+      this.color['1'].g,
+      this.color['1'].b,
+      this.color['2'].r,
+      this.color['2'].g,
+      this.color['2'].b,
+      this.color['3'].r,
+      this.color['3'].g,
+      this.color['3'].b,
+      this.var1,
+      this.var2
+    )
+
     autorun(() => {
       // if (this.connection.readyState !== 0) {
       //   await this.getSocketIp()
@@ -48,8 +93,22 @@ export class Store {
       // console.log('this.connection.readyState', this.connection.readyState)
 
       this.sendPattern()
+      if (this.generalVal === '3') {
+        localStorage.setItem(
+          'hobbithobby-currentPatternTop',
+          this.bigString2Send
+        )
+        this.currentPatternTop = this.bigString2Send
+      } else {
+        localStorage.setItem(
+          'hobbithobby-currentPatternMain',
+          this.bigString2Send
+        )
+        this.currentPatternMain = this.bigString2Send
+      }
     })
   }
+
   public getSocketIp = () => {
     this.ip = localStorage.getItem('hobbithobby-socketIp')
     if (this.ip) {
@@ -103,29 +162,74 @@ export class Store {
   }
 
   public sendPattern = () => {
-    let bigString2Send = ''
     let octaveValTmp = this.octaveVal
     if (octaveValTmp != 'A') {
       octaveValTmp = (7 - parseInt(octaveValTmp)).toString()
     }
-    bigString2Send = bigString2Send.concat(
-      this.generalVal,
-      this.octaveVal,
-      this.color['1'].r,
-      this.color['1'].g,
-      this.color['1'].b,
-      this.color['2'].r,
-      this.color['2'].g,
-      this.color['2'].b,
-      this.color['3'].r,
-      this.color['3'].g,
-      this.color['3'].b,
-      this.var1,
-      this.var2
+
+    if (this.generalVal === '3') {
+      this.bigString2Send = this.generalVal.concat(
+        this.octaveVal,
+        this.color['4'].r,
+        this.color['4'].g,
+        this.color['4'].b,
+        this.color['2'].r,
+        this.color['2'].g,
+        this.color['2'].b,
+        this.color['3'].r,
+        this.color['3'].g,
+        this.color['3'].b,
+        this.var1,
+        this.var2
+      )
+    } else {
+      this.bigString2Send = this.generalVal.concat(
+        this.octaveVal,
+        this.color['1'].r,
+        this.color['1'].g,
+        this.color['1'].b,
+        this.color['2'].r,
+        this.color['2'].g,
+        this.color['2'].b,
+        this.color['3'].r,
+        this.color['3'].g,
+        this.color['3'].b,
+        this.var1,
+        this.var2
+      )
+    }
+    if (this.bigString2Send !== '') {
+      console.log('dataSending', this.bigString2Send)
+      this.connection.send(this.bigString2Send)
+    }
+  }
+
+  public checkExistingPattern = (mode: number) => {
+    return this.patternStorage[mode].some(
+      item =>
+        item.main === this.currentPatternMain &&
+        item.top === this.currentPatternTop
     )
-    if (bigString2Send !== '') {
-      console.log('dataSending', bigString2Send)
-      this.connection.send(bigString2Send)
+  }
+
+  public savePattern = (mode: number) => {
+    if (!this.checkExistingPattern(1)) {
+      this.patternStorage = {
+        ...this.patternStorage,
+        [mode]: [
+          ...this.patternStorage[mode],
+          {
+            main: this.currentPatternMain,
+            top: this.currentPatternTop
+          }
+        ]
+      }
+      localStorage.setItem(
+        'hobbithobby-pattern',
+        JSON.stringify(this.patternStorage)
+      )
+    } else {
+      console.log('already saved***************')
     }
   }
 }
